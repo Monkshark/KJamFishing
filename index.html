@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>낚시</title>
+</head>
+<body>
+<p id="ip"></p>
+<p id="location"></p>
+
+<script>
+    fetch('https://api.ipify.org?format=json')
+        .then(results => results.json())
+        .then(data => {
+            document.getElementById('ip').textContent = `${data.ip}`;
+            return fetch(`http://ip-api.com/json/${data.ip}`);
+        })
+        .then(res => res.json())
+        .then(locationData => {
+            document.getElementById('location').textContent = `${locationData.city}, ${locationData.region}, ${locationData.country}`;
+        });
+</script>
+</body>
+</html>
