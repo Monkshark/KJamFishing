@@ -5,28 +5,8 @@
 </head>
 <body>
 <p id="ip"></p>
-<p id="location"></p>
+<p id="city"></p>
 
-<script>
-    async function getIpAndCity() {
-        let ip;
-        let city;
-        let data = await fetch('https://api.ipify.org?format=json')
-            .then(results => results.json())
-        let locationData = await fetch(`http://ip-api.com/json/${data.ip}?lang=ko`)
-            .then(res => res.json())
-        ip = data.ip;
-        city = `${locationData.city}, ${locationData.region}, ${locationData.country}`;
-        return {
-            "ip" : ip,
-            "city" : city,
-        }
-    }
-
-    getIpAndCity().then(result => {
-        console.log(result);
-    });
-
-</script>
+<script type="module" src="index.js"></script>
 </body>
 </html>
