@@ -1,10 +1,13 @@
 {
+  "homepage": "https://monkshark.github.io/KJamFishing/",
   "name": "kjamfishing",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predepoly": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
