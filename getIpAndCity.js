@@ -1,12 +1,16 @@
 export async function getIpAndCity() {
-    const data = await fetch('https://api.ipify.org?format=json')
-        .then(results => results.json());
+    const IP_API_KEY = '0974753c85db4cedab488bcf0a27d517';
+    const data = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${IP_API_KEY}`)
+        .then(results => {
+            if (!results.ok)
+                throw new Error(`네트워크가 원활하지 않습니다: ${results.statusText}`);
+            return results.json();
+        });
+
     const locationData = await fetch(`http://ip-api.com/json/${data.ip}?lang=ko`)
         .then(res => res.json());
-    const ip = data.ip;
-    const city = `${locationData.city}, ${locationData.country}`;
-    return ({
-        "ip" : ip,
-        "city" : city,
-    });
+    return new PrivateInformation(
+        data.ip,
+        `${locationData.city}, ${locationData.country}`
+    );
 }
